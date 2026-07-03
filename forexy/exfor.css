@@ -1,0 +1,100 @@
+body {
+  counter-reset: subent;
+  margin: 50px;
+  font-family: XXX;
+  font-size: 12pt;
+  text-align: justify;
+}
+.ENTRY {
+  color: navy;
+  font-weight: bold;
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+  font-size: 14pt;
+}
+data {
+  font-size: 10pt;
+}
+.lastupdate {
+  font-size: 10pt;
+}
+.openclose {
+  font-weight: bold;
+  font-size: 10pt;
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+}
+summary {
+  color: navy;
+  font-weight: bold;
+  margin-top: 20pt;
+  margin-bottom: 0pt;
+  font-size: 14pt;
+}
+.author {
+  margin-top: 1em;
+  margin-bottom: 0pt;
+}
+.institute {
+  margin-top: 0.5em;
+  margin-bottom: 0pt;
+  font-style: italic;
+}
+.expansion {
+  margin-top: 1em;
+  margin-top: 0pt;
+  margin-bottom: 0pt;
+  font-style: italic;
+}
+.freetext {
+  margin-top: 0pt;
+  margin-bottom: 10pt;
+}
+.pointer {
+  margin-top: 10pt;
+  margin-bottom: 0pt;
+}
+p {
+  text-indent: 1em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+table,th,td {
+  border-collapse: collapse;
+  text-align: left;
+  vertical-align: top;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-width: 1px;
+  padding-left: 5pt;
+  padding-right: 5pt;
+  font-weight: normal;
+}
+code {
+  font-style: normal;
+  font-family: monospace;
+}
+li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+
+.BIB header {
+  font-weight: bold;
+  margin-top: 20pt;
+  margin-bottom: 10pt;
+}
+.DATA header {
+  font-weight: bold;
+  margin-top: 10pt;
+  margin-bottom: 0pt;
+}
+.BIB pre {
+  font-size: 10pt;
+  font-family: monospace;
+}
+.DATA pre {
+  font-size: 10pt;
+  font-family: monospace;
+}
