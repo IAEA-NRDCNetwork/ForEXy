@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# REFDOI Ver.2026.06.24
+# REFDOI Ver.2026.09.26
 # (Utility to obtain DOIs for references in EXFOR file)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -223,19 +223,19 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Check presence of references in EXFOR file",\
-   epilog="example: x4_refdoi.py -i exfor.txt -d dict.json -o x4_refdoi_out.txt -m email@address.com")
+   epilog="example: x4_refdoi.py -i exfor.txt -o x4_refdoi.txt -m email@address.com")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_x4",\
    help="input EXFOR file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-o", "--file_doi",\
    help="output DOI file")
   parser.add_argument("-j", "--file_json",\
    help="output JSON file")
   parser.add_argument("-k", "--key_anal",\
-   help="keywords to analyse (optional)", default=["REFERENCE"], nargs="+")
+   help="keywords to analyse (optional, default: REFERENCE)", default=["REFERENCE"], nargs="+")
   parser.add_argument("-m", "--email",\
    help="your email address")
   parser.add_argument("-f", "--force",\
@@ -255,27 +255,24 @@ def get_input(args):
 
   file_x4=args.file_x4
   if file_x4 is None:
-    file_x4=input("input EXFOR file [exfor.txt] ----------> ")
+    file_x4=input("input EXFOR file [exfor.txt] ------> ")
     if file_x4=="":
       file_x4="exfor.txt"
   if not os.path.exists(file_x4):
     print(" ** File "+file_x4+" does not exist.")
   while not os.path.exists(file_x4):
-    file_x4=input("input EXFOR file [exfor.txt] ----------> ")
+    file_x4=input("input EXFOR file [exfor.txt] ------> ")
     if file_x4=="":
       file_x4="exfor.txt"
     if not os.path.exists(file_x4):
       print(" ** File "+file_x4+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("JSON Dictionary [dict.json] -----------> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary -------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("JSON Dictionary [dict.json] -----------> ")
+    file_dict=input("JSON DIctionary [dict.json] -------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
@@ -283,35 +280,35 @@ def get_input(args):
 
   file_doi=args.file_doi
   if file_doi is None:
-    file_doi=input("Output DOI file [x4_refdoi_out.txt] ---> ")
+    file_doi=input("Output DOI file [x4_refdoi.txt] ---> ")
   if file_doi=="":
-    file_doi="x4_refdoi_out.txt"
+    file_doi="x4_refdoi.txt"
   if os.path.isfile(file_doi):
     msg="File '"+file_doi+"' exists and must be overwritten."
     print_error(msg,"",force0)
 
   file_json=args.file_json
   if file_json is None:
-    file_json=input("Output JSON file [x4_refdoi_out.json] -> ")
+    file_json=input("Output JSON file [x4_refdoi.json] -> ")
   if file_json=="":
-    file_json="x4_refdoi_out.json"
+    file_json="x4_refdoi.json"
   if os.path.isfile(file_json):
     msg="File '"+file_json+"' exists and will be updated."
     print_error(msg,"",force0)
 
   key_anal=args.key_anal
-  print("input keywords to analyse -------------> ", end="")
+  print("input keywords to analyse ---------> ", end="")
   for char in key_anal:
     print(char+" ", end="")
   print("\n")
 
   email=args.email
   if email is None:
-    email=input("your email address --------------------> ")
+    email=input("your email address ----------------> ")
   if not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
     print(" ** Input a correct email address.")
   while not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
-    email=input("your email address --------------------> ")
+    email=input("your email address ----------------> ")
     if not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
       print(" ** Input a correct email address.")
 

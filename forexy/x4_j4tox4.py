@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# J4TOX4 Ver.2026.06.24
+# J4TOX4 Ver.2026.09.26
 # (Utility to convert J4 to EXFOR)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -581,13 +581,13 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Convert J4 file to EXFOR file",\
-   epilog="example: x4_j4tox4.py -i exfor.json -d dict.json -o exfor.txt")
+   epilog="example: x4_j4tox4.py -i exfor.json -o exfor.txt")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_j4",\
    help="input J4 file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, defafault: dict.json)", default="dict.json")
   parser.add_argument("-o", "--file_x4",\
    help="output EXFOR file")
   parser.add_argument("-f", "--force",\
@@ -607,27 +607,24 @@ def get_input(args):
 
   file_j4=args.file_j4
   if file_j4 is None:
-    file_j4=input("input J4 file [exfor.json] --------> ")
+    file_j4=input("input J4 file [exfor.json] ----> ")
     if file_j4=="":
       file_j4="exfor.json"
   if not os.path.exists(file_j4):
     print(" ** File "+file_j4+" does not exist.")
   while not os.path.exists(file_j4):
-    file_j4=input("input J4 file [exfor.json] --------> ")
+    file_j4=input("input J4 file [exfor.json] ----> ")
     if file_j4=="":
       file_j4="exfor.json"
     if not os.path.exists(file_j4):
       print(" ** File "+file_j4+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] -> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary ---------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON Dictionary [dict.json] -> ")
+    file_dict=input("JSON DIctionary [dict.json] ---> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
@@ -635,7 +632,7 @@ def get_input(args):
 
   file_x4=args.file_x4
   if file_x4 is None:
-    file_x4=input("output EXFOR file [exfor.txt] -----> ")
+    file_x4=input("output EXFOR file [exfor.txt] -> ")
   if file_x4=="":
     file_x4="exfor.txt"
   if os.path.isfile(file_x4):

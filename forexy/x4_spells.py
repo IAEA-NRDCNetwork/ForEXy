@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# SPELLS Ver.2026.06.24
+# SPELLS Ver.2026.09.26
 # (Spell checker for free text in EXFOR)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -20,6 +20,7 @@ spell = SpellChecker()
 def spells():
   args=get_args(ver)
   main(*get_input(args))
+
 
 def main(file_x4,file_dict,file_typo,force0):
   time_start=time.time()
@@ -81,13 +82,13 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Check English spells in free text of EXFOR file",\
-   epilog="example: x4_spells.py -i exfor.txt -d x4_spells.dic -o x4_spells_out.txt")
+   epilog="example: x4_spells.py -i exfor.txt -o x4_spells_out.txt")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_x4",\
    help="input EXFOR file")
   parser.add_argument("-d", "--file_dict",\
-   help="input known word dictionary")
+   help="input known word dictionary (optional, default: x4_spells.dic)", default="x4_spells.dic")
   parser.add_argument("-o", "--file_typo",\
    help="output summary of typos")
   parser.add_argument("-f", "--force",\
@@ -121,6 +122,7 @@ def get_input(args):
       print(" ** File "+file_x4+" does not exist.")
 
   file_dict=args.file_dict
+  print("input known word dictionary -----------------> "+file_dict)
   if file_dict is None:
     file_dict=input("input known word dictionary [x4_spells.dic] -> ")
     if file_dict=="":
@@ -128,7 +130,7 @@ def get_input(args):
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input known word dictionary [x4_spells.dic] --> ")
+    file_dict=input("input known word dictionary [x4_spells.dic] -> ")
     if file_dict=="":
       file_dict="x4_spells.dic"
     if not os.path.exists(file_dict):
@@ -136,9 +138,9 @@ def get_input(args):
 
   file_typo=args.file_typo
   if file_typo is None:
-    file_typo=input("output typo list file [x4_spells_out.txt] ---> ")
+    file_typo=input("output typo list file [x4_spells.txt] -------> ")
   if file_typo=="":
-    file_typo="x4_spells_out.txt"
+    file_typo="x4_spells.txt"
   if os.path.isfile(file_typo):
     msg="File '"+file_typo+"' exists and must be overwritten."
     print_error(msg,"",force0)

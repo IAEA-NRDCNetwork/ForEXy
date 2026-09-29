@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# MAKCOV Ver.2026.06.24
+# MAKCOV Ver.2026.09.26
 # (Utility to convert EXFOR in JSON to covariance)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -132,6 +132,7 @@ import time
 def makcov():
   args=get_args(ver)
   main(*get_input(args))
+
 
 def main(file_j4,file_hed,file_dict,data_id,file_cov,file_log,x_min,x_max,force0,shape0,outfrc0):
   time_start=time.time()
@@ -940,7 +941,7 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Convert EXFOR in JSON to a tabular format",\
-   epilog="example: x4_makcov.py -i exfor.json -j exfor_hed.txt -d dict.json -e 22742.004.1 -o x4_makcov_out.txt -g x4_makcov.log")
+   epilog="example: x4_makcov.py -i exfor.json -j exfor_hed.txt -e 22742.004.1 -o x4_makcov.txt -g x4_makcov.log")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_j4",\
@@ -948,13 +949,13 @@ def get_args(ver):
   parser.add_argument("-j", "--file_hed",\
    help="input HED file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON Dictionary")
+   help="input JSON Dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-e", "--data_id",\
    help="EXFOR Dataset ID")
   parser.add_argument("-o", "--file_cov",\
    help="output covariance file")
   parser.add_argument("-g", "--file_log",\
-   help="output log file (optional)", default="x4_makcov.log")
+   help="output log file (optional, default: x4_makcov.log)", default="x4_makcov.log")
   parser.add_argument("-l", "--x_min",\
    help="lower boundary of independent variable (optional)")
   parser.add_argument("-u", "--x_max",\
@@ -982,13 +983,13 @@ def get_input(args):
 
   file_j4=args.file_j4
   if file_j4 is None:
-    file_j4=input("input J4 file [exfor.json] -----------------> ")
+    file_j4=input("input J4 file [exfor.json] -------------> ")
     if file_j4=="":
       file_j4="exfor.json"
   if not os.path.exists(file_j4):
     print(" ** File "+file_j4+" does not exist.")
   while not os.path.exists(file_j4):
-    file_j4=input("input J4 file [exfor.json] -----------------> ")
+    file_j4=input("input J4 file [exfor.json] -------------> ")
     if file_j4=="":
       file_j4="exfor.txt"
     if not os.path.exists(file_j4):
@@ -996,27 +997,24 @@ def get_input(args):
 
   file_hed=args.file_hed
   if file_hed is None:
-    file_hed=input("input HED file [exfor_hed.txt] -------------> ")
+    file_hed=input("input HED file [exfor_hed.txt] ---------> ")
     if file_hed=="":
       file_hed="exfor_hed.txt"
   if not os.path.exists(file_hed):
     print(" ** File "+file_hed+" does not exist.")
   while not os.path.exists(file_hed):
-    file_hed=input("input HED file [exfor_hed.txt] ------------> ")
+    file_hed=input("input HED file [exfor_hed.txt] --------> ")
     if file_hed=="":
       file_hed="exfor_hed.txt"
     if not os.path.exists(file_hed):
       print(" ** File "+file_hed+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] ----------> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary ------------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON Dictionary [dict.json] ----------> ")
+    file_dict=input("JSON DIctionary [dict.json] ------------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
@@ -1024,14 +1022,14 @@ def get_input(args):
 
   data_id=args.data_id
   if data_id is None:
-    data_id=input("EXFOR Dataset ID [22742.004.1] -------------> ")
+    data_id=input("EXFOR Dataset ID [22742.004.1] ---------> ")
     if data_id=="":
       data_id="22742.004.1"
   data_id=data_id.upper()
   if not re.compile(r"^[1-9A-Z]\d{4}\.\d{3}(\.[1-9A-Z])?$").search(data_id):
     print(" ** EXFOR dataset ID "+data_id+" is illegal.")
   while not re.compile(r"^[1-9A-Z]\d{4}\.\d{3}(\.[1-9A-Z])?$").search(data_id):
-    data_id=input("EXFOR Dataset ID [22742.004.1] -------------> ")
+    data_id=input("EXFOR Dataset ID [22742.004.1] ---------> ")
     data_id=data_id.upper()
     if data_id=="":
       data_id="22742.004.1"
@@ -1040,19 +1038,15 @@ def get_input(args):
 
   file_cov=args.file_cov
   if file_cov is None:
-    file_cov=input("output covariance file [x4_makcov_out.txt] -> ")
+    file_cov=input("output covariance file [x4_makcov.txt] -> ")
   if file_cov=="":
-    file_cov="x4_makcov_out.txt"
+    file_cov="x4_makcov.txt"
   if os.path.isfile(file_cov):
     msg="File '"+file_cov+"' exists and must be overwritten."
     print_error(msg,"",force0)
 
   file_log=args.file_log
-# if file_log is None:
-#   file_log=input("output log file [x4_makcov.log] ------------> ")
-# if file_log=="":
-#   file_log="x4_makcov.log"
-  print("output log file ----------------------------> "+file_log)
+  print("output log file ------------------------> "+file_log)
   print("\n")
   if os.path.isfile(file_log):
     msg="File '"+file_log+"' exists and must be overwritten."

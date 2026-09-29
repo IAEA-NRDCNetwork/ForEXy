@@ -37,6 +37,7 @@ def  main(dir_storage,file_lib,tape_id,force0,add190,cut660,nodic0):
   time_elapsed=format(time_end-time_start, ".2f")
   print("MAKLIB: Processing terminated normally. "+time_elapsed+" sec.\n")
 
+
 def output(file_lib,tape_id,nan,col80,area_ini,area_fin,line_out):
   f=open(file_lib,"w")
 
@@ -65,6 +66,7 @@ def output(file_lib,tape_id,nan,col80,area_ini,area_fin,line_out):
     f.write("ENDLIB     "+n1+"\n")
 
   f.close()
+
 
 def merge(file_lib,dir_storage):
   entries=list()

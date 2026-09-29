@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# DIRUPD Ver.2026.06.24
+# DIRUPD Ver.2026.09.26
 # (Utility to update EXFOR entry local storage)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -16,6 +16,7 @@ import time
 def dirupd():
   args=get_args(ver)
   main(*get_input(args))
+
 
 def main(file_trans,dir_storage,file_log,force0,cut660):
   time_start=time.time() 
@@ -365,7 +366,7 @@ def update_log(file_log,tid_new,tdate_new,file_trans):
 def get_args(ver):
   parser=argparse.ArgumentParser(\
           usage="Update of an EXFOR entry local storage",
-          epilog="example: x4_dirupd.py -t trans.txt -d entry -g x4_dirupd.log")
+          epilog="example: x4_dirupd.py -t trans.txt -d entry")
   parser.add_argument("-v", "--version",\
           action="version", version=ver)
   parser.add_argument("-t", "--file_trans",\
@@ -373,7 +374,7 @@ def get_args(ver):
   parser.add_argument("-d", "--dir_storage",\
    help="directory of output entry storage")
   parser.add_argument("-g", "--file_log",\
-   help="input/output log file (optional)", default="x4_dirupd.log")
+   help="input/output log file (optional, default: x4_dirupd.log)", default="x4_dirupd.log")
   parser.add_argument("-f", "--force",\
    help="never prompt", action="store_true")
   parser.add_argument("-c", "--cut66",\
@@ -421,10 +422,6 @@ def get_input(args):
       print(" ** Directory '"+dir_storage+"' does not exist.")
 
   file_log=args.file_log
-# if file_log is None:
-#   file_log=input("output log file [x4_dirupd.log] -----------> ")
-# if file_log=="":
-#   file_log="x4_dirupd.log"
   print("output log file ---------------------------> "+file_log)
   print("\n")
   if not os.path.isfile(file_log):

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# REFBIB Ver.2026.06.24
+# REFBIB Ver.2026.09.26
 # (Utility for getting and processing CrossRef metadata)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -21,6 +21,7 @@ spell = SpellChecker()
 def refbib():
   args=get_args(ver)
   main(*get_input(args))
+
 
 def main(ref_inp,fauthor,file_dict,file_bib,form,email,force0,strip0):
   time_start=time.time()
@@ -236,6 +237,7 @@ def print_exfor(file_bib,data,volume,year):
     title="(No title?)"
   title=re.sub(r"(<\/?.+?>)+", " ", title)
   title=re.sub(r"(^\s+|\s+$)", "", title)
+  form="exfor"
   title=title_lower(title,form)
   titles=title.split()
   line_out="TITLE     "
@@ -630,7 +632,7 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Get CrossRef Metadata for an EXFOR reference code or DOI",\
-   epilog="example: x4_refbib.py -i J,NDS,120,272,2014 -a any -d dict.json -o x4_refbib_out.txt -r doi -m email@address.com")
+   epilog="example: x4_refbib.py -i J,NDS,120,272,2014 -o x4_refbib.txt -r doi -m email@address.com")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--ref_inp",\
@@ -638,7 +640,7 @@ def get_args(ver):
   parser.add_argument("-a", "--fauthor",\
    help="family name of the first author (optional, 'any' for any first authors)", default="any")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-o", "--file_bib",\
    help="output bibliography file")
   parser.add_argument("-r", "--form",\
@@ -678,17 +680,10 @@ def get_input(args):
       print(" ** Input a correct EXFOR reference code or DOI.")
 
   fauthor=args.fauthor
-# if fauthor is None:
-#   fauthor=input("Family name of the first author [any] ------------> ")
-#   if fauthor=="":
-#     fauthor="any"
   print("Family name of the first author ------------------> "+fauthor)
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("JSON Dictionary [dict.json] ----------------------> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary ----------------------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
@@ -700,9 +695,9 @@ def get_input(args):
 
   file_bib=args.file_bib
   if file_bib is None:
-    file_bib=input("output bibliography file [x4_refbib_out.txt] -----> ")
+    file_bib=input("output bibliography file [x4_refbib.txt] ---------> ")
   if file_bib=="":
-    file_bib="x4_refbib_out.txt"
+    file_bib="x4_refbib.txt"
   if os.path.isfile(file_bib):
     msg="File '"+file_bib+"' exists and must be overwritten."
     print_error(msg,"",force0)

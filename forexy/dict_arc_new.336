@@ -1,0 +1,146 @@
+ TRA                                       --------------------------------------------------------                        
+ TRA                                       Columns   Description                                                           
+ TRA                                       --------  -----------                                                           
+ TRA                                         44- 47  REACTION SF2                                                          
+ TRA                                                 * any code is allowed                                                 
+ TRA                                         49      INL flag                                                              
+ TRA                                                 . The outgoing particle code appears as INL                           
+ TRA                                                   when the same particle code is in SF2.                              
+ TRA                                                  Example:                                                             
+ TRA                                                    MT4 SF2=A -> SF3=N                                                 
+ TRA                                                    MT4 SF2=N -> SF3=INL                                               
+ TRA                                         51- 60  REACTION SF3                                                          
+ TRA                                                 + X or F                                                              
+ TRA                                         61- 74  REACTION SF4                                                          
+ TRA                                                 ELEM/MASS A nuclide code with Z>2 or ELEM/MASS                        
+ TRA                                                 * any code is allowed                                                 
+ TRA                                         76- 85  REACTION SF5                                                          
+ TRA                                                 + brank or IND                                                        
+ TRA                                                 - CUM or (CUM) or M+ or (M)                                           
+ TRA                                         87- 96  REACTION SF6                                                          
+ TRA                                                 * SIG, DA, DE or DA/DE                                                
+ TRA                                                 + SIG or FY                                                           
+ TRA                                         98-107  REACTION SF7                                                          
+ TRA                                                 + empty or G with SF6=SIG, DA or DE                                   
+ TRA                                       --------------------------------------------------------                        
+ TRA 202500 1                              *      TOT                                 SIG                                  
+ TRA 202500 2                              *      EL        *                         *                                    
+ TRA 202500 3                              *      NON                                 SIG                                  
+ TRA 202500 4                              *    . N         *                         *          +                         
+ TRA 202500 11                             *      2N+D      *                         SIG        +                         
+ TRA 202500 16                             *      2N        *                         SIG        +                         
+ TRA 202500 17                             *      3N        *                         SIG        +                         
+ TRA 202500 18                             *      F                                   SIG                                  
+ TRA 202500 22                             *      N+A       *                         SIG        +                         
+ TRA 202500 23                             *      N+3A      *                         SIG        +                         
+ TRA 202500 24                             *      2N+A      *                         SIG        +                         
+ TRA 202500 25                             *      3N+A      *                         SIG        +                         
+ TRA 202500 27                             *      ABS       *                         SIG                                  
+ TRA 202500 28                             *      N+P       *                         SIG                                  
+ TRA 202500 29                             *      N+2A      *                         SIG        +                         
+ TRA 202500 30                             *      2N+2A     *                         SIG        +                         
+ TRA 202500 32                             *      N+D       *                         SIG        +                         
+ TRA 202500 33                             *      N+T       *                         SIG        +                         
+ TRA 202500 34                             *      N+HE3     *                         SIG        +                         
+ TRA 202500 35                             *      N+D+2A    *                         SIG        +                         
+ TRA 202500 36                             *      N+T+2A    *                         SIG        +                         
+ TRA 202500 37                             *      4N        *                         SIG        +                         
+ TRA 202500 41                             *      2N+P      *                         SIG                                  
+ TRA 202500 42                             *      3N+P      *                         SIG                                  
+ TRA 202500 44                             *      N+2P      *                         SIG        +                         
+ TRA 202500 45                             *      N+P+A     *                         SIG        +                         
+ TRA 202500 50                             *      N         *              PAR        *          +                         
+ TRA 202500 51                             N      INL       *              PAR        *          +                         
+ TRA 202500 102                            *    . G         *                         *          +                         
+ TRA 202500 103                            *    . P         *                         *          +                         
+ TRA 202500 104                            *    . D         *                         *          +                         
+ TRA 202500 105                            *    . T         *                         *          +                         
+ TRA 202500 106                            *    . HE3       *                         *          +                         
+ TRA 202500 107                            *    . A         *                         *          +                         
+ TRA 202500 108                            *      2A        *                         SIG        +                         
+ TRA 202500 109                            *      3A        *                         SIG        +                         
+ TRA 202500 111                            *      2P        *                         SIG        +                         
+ TRA 202500 112                            *      P+A       *                         SIG        +                         
+ TRA 202500 113                            *      T+2A      *                         SIG        +                         
+ TRA 202500 114                            *      D+2A      *                         SIG        +                         
+ TRA 202500 115                            *      P+D       *                         SIG        +                         
+ TRA 202500 116                            *      P+T       *                         SIG        +                         
+ TRA 202500 117                            *      D+A       *                         SIG        +                         
+ TRA 202500 152                            *      5N        *                         SIG        +                         
+ TRA 202500 153                            *      6N        *                         SIG        +                         
+ TRA 202500 154                            *      2N+T      *                         SIG        +                         
+ TRA 202500 155                            *      T+A       *                         SIG        +                         
+ TRA 202500 156                            *      4N+P      *                         SIG                                  
+ TRA 202500 157                            *      3N+D      *                         SIG        +                         
+ TRA 202500 158                            *      N+D+A     *                         SIG        +                         
+ TRA 202500 159                            *      2N+P+A    *                         SIG                                  
+ TRA 202500 160                            *      7N        *                         SIG        +                         
+ TRA 202500 161                            *      8N        *                         SIG        +                         
+ TRA 202500 162                            *      5N+P      *                         SIG                                  
+ TRA 202500 163                            *      6N+P      *                         SIG                                  
+ TRA 202500 164                            *      7N+P      *                         SIG                                  
+ TRA 202500 165                            *      4N+A      *                         SIG        +                         
+ TRA 202500 166                            *      5N+A      *                         SIG        +                         
+ TRA 202500 167                            *      6N+A      *                         SIG        +                         
+ TRA 202500 168                            *      7N+A      *                         SIG        +                         
+ TRA 202500 169                            *      4N+D      *                         SIG                                  
+ TRA 202500 170                            *      5N+D      *                         SIG                                  
+ TRA 202500 171                            *      6N+D      *                         SIG                                  
+ TRA 202500 172                            *      3N+T      *                         SIG        +                         
+ TRA 202500 173                            *      4N+T      *                         SIG        +                         
+ TRA 202500 174                            *      5N+T      *                         SIG        +                         
+ TRA 202500 175                            *      6N+T      *                         SIG        +                         
+ TRA 202500 176                            *      2N+HE3    *                         SIG        +                         
+ TRA 202500 177                            *      3N+HE3    *                         SIG        +                         
+ TRA 202500 178                            *      4N+HE3    *                         SIG        +                         
+ TRA 202500 179                            *      3N+2P     *                         SIG                                  
+ TRA 202500 180                            *      3N+2A     *                         SIG        +                         
+ TRA 202500 181                            *      3N+P+A    *                         SIG                                  
+ TRA 202500 182                            *      D+T       *                         SIG        +                         
+ TRA 202500 183                            *      N+P+D     *                         SIG                                  
+ TRA 202500 184                            *      N+P+T     *                         SIG                                  
+ TRA 202500 185                            *      N+D+T     *                         SIG        +                         
+ TRA 202500 186                            *      N+P+HE3   *                         SIG                                  
+ TRA 202500 187                            *      N+D+HE3   *                         SIG        +                         
+ TRA 202500 188                            *      N+T+HE3   *                         SIG        +                         
+ TRA 202500 189                            *      N+T+A     *                         SIG        +                         
+ TRA 202500 190                            *      2N+2P     *                         SIG                                  
+ TRA 202500 191                            *      P+HE3     *                         SIG        +                         
+ TRA 202500 192                            *      D+HE3     *                         SIG        +                         
+ TRA 202500 193                            *      HE3+A     *                         SIG        +                         
+ TRA 202500 194                            *      4N+2P     *                         SIG                                  
+ TRA 202500 195                            *      4N+2A     *                         SIG        +                         
+ TRA 202500 196                            *      4N+P+A    *                         SIG                                  
+ TRA 202500 197                            *      3P        *                         SIG        +                         
+ TRA 202500 198                            *      N+3P      *                         SIG                                  
+ TRA 202500 199                            *      3N+2P+A   *                         SIG                                  
+ TRA 202500 200                            *      5N+2P     *                         SIG                                  
+ TRA 202500 201                            *      X         0-NN-1                    *                                    
+ TRA 202500 202                            *      X         0-G-0                     *                                    
+ TRA 202500 203                            *      X         1-H-1                     *                                    
+ TRA 202500 204                            *      X         1-H-2                     *                                    
+ TRA 202500 205                            *      X         1-H-3                     *                                    
+ TRA 202500 206                            *      X         2-HE-3                    *                                    
+ TRA 202500 207                            *      X         2-HE-4                    *                                    
+ TRA 202500 208                            *      X         1-PP-0                    *                                    
+ TRA 202500 209                            *      X         0-P0-0                    *                                    
+ TRA 202500 210                            *      X         1-PN-0                    *                                    
+ TRA 202500 213                            *      X         1-KP-0                    *                                    
+ TRA 202500 216                            *      X         1-KN-0                    *                                    
+ TRA 202500 217                            *      X         1-AP-1                    *                                    
+ TRA 202500 218                            *      X         0-AN-1                    *                                    
+ TRA 202500 452                            *      F                                   NU                                   
+ TRA 202500 454                            *      +         ELEM/MASS      +          +                                    
+ TRA 202500 455                            *      F                        DL         NU                                   
+ TRA 202500 456                            *      F                        PR         NU                                   
+ TRA 202500 459                            *      *         ELEM/MASS      -          +                                    
+ TRA 202500 600                            *      P         *              PAR        *          +                         
+ TRA 202500 601                            P      INL       *              PAR        *          +                         
+ TRA 202500 650                            *      D         *              PAR        *          +                         
+ TRA 202500 651                            D      INL       *              PAR        *          +                         
+ TRA 202500 700                            *      T         *              PAR        *          +                         
+ TRA 202500 701                            T      INL       *              PAR        *          +                         
+ TRA 202500 750                            *      HE3       *              PAR        *          +                         
+ TRA 202500 751                            HE3    INL       *              PAR        *          +                         
+ TRA 202500 800                            *      A         *              PAR        *          +                         
+ TRA 202500 801                            A      INL       *              PAR        *          +                         

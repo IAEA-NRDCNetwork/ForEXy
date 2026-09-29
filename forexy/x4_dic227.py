@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# DIC227 Ver.2026.06.24
+# DIC227 Ver.2026.09.26
 # (Converter from Nubase to Archive Dictionary 227)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -366,15 +366,15 @@ def main(file_nubase,file_suppl,file_arc227,force0):
 def get_args(ver):
   parser=argparse.ArgumentParser(\
    usage="Convert NUBASE to Archive Dictionary 227",\
-   epilog="example: x4_dic227.py -i nubase_4.mas20.txt -s dict_arc_sup.227 -o dict_arc_new.227")
+   epilog="example: x4_dic227.py -i nubase_4.mas20.txt")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_nubase",\
    help="input NUBASE file")
   parser.add_argument("-s", "--file_suppl",\
-   help="input supplemental dictionary file")
+   help="input supplemental dictionary file (optional, default: dict_arc_sup.227)", default="dict_arc_sup.227")
   parser.add_argument("-o", "--file_arc227",\
-   help="output Archive Dictionary file (optional)", default="dict_arc_new.227")
+   help="output Archive Dictionary file (optional, default: dict_arc_new.227)", default="dict_arc_new.227")
   parser.add_argument("-f", "--force",\
    help="never prompt", action="store_true")
 
@@ -392,23 +392,20 @@ def get_input(args):
 
   file_nubase=args.file_nubase
   if file_nubase is None:
-    file_nubase=input("input Nubase file [nubase_4.mas20.txt] ----------------> ")
+    file_nubase=input("input Nubase file [nubase_4.mas20.txt] -----> ")
     if file_nubase=="":
       file_nubase="nubase_4.mas20.txt"
   if not os.path.isfile(file_nubase):
     print(" ** File "+file_nubase+" does not exist.")
   while not os.path.isfile(file_nubase):
-    file_nubase=input("input Nubase file [nubase_4.mas20.txt] ----------------> ")
+    file_nubase=input("input Nubase file [nubase_4.mas20.txt] -----> ")
     if file_nubase=="":
       file_nubase="nubase_4.mas20.txt"
     if not os.path.isfile(file_nubase):
       print(" ** File "+file_nubase+" does not exist.")
 
   file_suppl=args.file_suppl
-  if file_suppl is None:
-    file_suppl=input("input supplemental dictionary file [dict_arc_sup.227] -> ")
-    if file_suppl=="":
-      file_suppl="dict_arc_sup.227"
+  print("input supplemental dictionary file ---------> "+file_suppl)
   if not os.path.isfile(file_suppl):
     print(" ** File "+file_suppl+" does not exist.")
   while not os.path.isfile(file_suppl):
@@ -419,7 +416,7 @@ def get_input(args):
       print(" ** File "+file_suppl+" does not exist.")
 
   file_arc227=args.file_arc227
-  print("output Archive Dictionary file ------------------------> "+file_arc227)
+  print("output Archive Dictionary file -------------> "+file_arc227)
   print("\n")
   if os.path.isfile(file_arc227):
     msg="File '"+file_arc227+"' exists and must be overwritten."

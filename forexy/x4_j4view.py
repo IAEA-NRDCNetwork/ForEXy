@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# J4VIEW Ver.2026.06.24
+# J4VIEW Ver.2026.09.26
 # (Utility to convert J4 to HTML)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -1594,15 +1594,15 @@ def read_dict(file_dict):
 def get_args(ver):
   parser=argparse.ArgumentParser(\
    usage="Convert J4 file to HTML file",\
-   epilog="example: x4_j4view.py -i json -d dict.json -c exfor.css -e 22742 -o exfor.html")
+   epilog="example: x4_j4view.py -i j4 -e 22742 -o exfor.html")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--dir_j4",\
    help="directory of input J4 files")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-c", "--file_css",\
-   help="input CSS file")
+   help="input CSS file (optional, default: exfor.css)", default="exfor.css")
   parser.add_argument("-e", "--entry",\
    help="EXFOR Entry number")
   parser.add_argument("-o", "--file_html",\
@@ -1642,41 +1642,35 @@ def get_input(args):
 
   dir_j4=args.dir_j4
   if dir_j4 is None:
-    dir_j4=input("Directory of input J4 files [j4] ---> ")
+    dir_j4=input("Directory of input J4 files [j4] --> ")
     if dir_j4=="":
       dir_j4="j4"
   if not os.path.exists(dir_j4):
     print(" ** Directory "+dir_j4+" does not exist.")
   while not os.path.exists(dir_j4):
-    dir_j4=input("Directory of input J4 files [j4] ---> ")
+    dir_j4=input("Directory of input J4 files [j4] --> ")
     if dir_j4=="":
       dir_j4="j4"
     if not os.path.exists(dir_j4):
       print(" ** Directory "+dir_j4+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] --> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary -------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON Dictionary [dict.json] --> ")
+    file_dict=input("JSON DIctionary [dict.json] -------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
       print(" ** File "+file_dict+" does not exist.")
 
   file_css=args.file_css
-  if file_css is None:
-    file_css=input("input CSS file [exfor.css] ---------> ")
-    if file_css=="":
-      file_css="exfor.css"
+  print("input CSS file --------------------> "+file_css)
   if not os.path.exists(file_css):
     print(" ** File "+file_css+" does not exist.")
   while not os.path.exists(file_css):
-    file_css=input("input CSS file [exfor.css] ---------> ")
+    file_css=input("input CSS file [exfor.css] --------> ")
     if file_css=="":
       file_css="exfor.css"
     if not os.path.exists(file_css):
@@ -1684,7 +1678,7 @@ def get_input(args):
 
   entry=args.entry
   if entry is None:
-    entry=input("EXFOR Entry # [22742] --------------> ")
+    entry=input("EXFOR Entry # [22742] -------------> ")
     if entry=="":
       entry="22742"
   entry_lower=entry.lower()
@@ -1694,7 +1688,7 @@ def get_input(args):
   if len(files)==0:
     print(" ** JSON file for EXFOR Entry "+entry+" does not exist.")
   while len(files)==0:
-    entry=input("EXFOR Entry # [22742] --------------> ")
+    entry=input("EXFOR Entry # [22742] -------------> ")
     if entry=="":
       entry="22742"
     entry_lower=entry.lower()
@@ -1706,7 +1700,7 @@ def get_input(args):
 
   file_html=args.file_html
   if file_html is None:
-    file_html=input("output HTML file [exfor.html] ------> ")
+    file_html=input("output HTML file [exfor.html] -----> ")
   if file_html=="":
     file_html="exfor.html"
   if os.path.isfile(file_html):

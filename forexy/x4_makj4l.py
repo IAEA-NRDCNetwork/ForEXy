@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# MAKJ4L Ver.2026.06.24
+# MAKJ4L Ver.2026.09.26
 # (Utility for production and update of J4 file storage)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -51,14 +51,14 @@ def main(dir_storage,file_dict,dir_j4lib,file_trans,file_log,email0,force0):
       file_x4=dir_storage+"/"+ area+"/"+entry+".txt"
       make_j4(file_x4,dir_storage,file_dict,dir_j4lib,force)
 
-  update_log(file_log,tid,tdate,dir_j4lib)
+  update_log(file_log,file_trans,tid,tdate,dir_j4lib)
 
   time_end=time.time()
   time_elapsed=format(time_end-time_start, ".2f")
   print("MAKJ4L: Processing terminated normally. "+time_elapsed+" sec.\n")
 
 
-def update_log(file_log,tid,tdate,dir_j4lib):
+def update_log(file_log,file_trans,tid,tdate,dir_j4lib):
   centre={'1': 'NNDC  ',  '2': 'NEADB ', '3': 'NDS   ',  '4': 'CJD   ',
           '9': 'NDS   ',
           'A': 'CNPD  ',  'B': 'NDS   ', 'C': 'NNDC  ',  'D': 'NDS   ',
@@ -169,15 +169,15 @@ def get_args(ver):
   parser.add_argument("-i", "--dir_storage",\
    help="input entry storage directory")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON Dictionary")
+   help="input JSON Dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-j", "--dir_j4lib",\
    help="output J4 library storage")
   parser.add_argument("-t", "--file_trans",\
-   help="input trans tape (optional)", default=None)
+   help="input trans tape (optional, default: None)", default=None)
   parser.add_argument("-g", "--file_log",\
-   help="output log file (optional)", default="x4_makj4l.log")
+   help="output log file (optional, default: x4_makj4l.log)", default="x4_makj4l.log")
   parser.add_argument("-m", "--email",\
-   help="your email address (optional)", default=None)
+   help="your email address (optional, default: None)", default=None)
   parser.add_argument("-f", "--force",\
    help="never prompt", action="store_true")
 
@@ -209,14 +209,11 @@ def get_input(args):
       print(" ** Directory '"+dir_storage+"' does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("JSON Dictionary [dict.json] --------------> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary --------------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("JSON DIctionary [dict.json] --> ")
+    file_dict=input("JSON DIctionary [dict.json] --------------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
@@ -251,10 +248,6 @@ def get_input(args):
     print("input trans tape -------------------------> "+file_trans)
 
   file_log=args.file_log
-# if file_log is None:
-#   file_log=input("output log file [x4_makj4l.log] -----------> ")
-# if file_log=="":
-#   file_log="x4_dirupd.log"
   print("output log file --------------------------> "+file_log)
   if not os.path.isfile(file_log):
     msg="File '"+file_log+"' is absent and will be created."
@@ -262,18 +255,14 @@ def get_input(args):
 
   email=args.email
   if email is None:
-    email=input("your email address [(skip)] --------------> ")
-    if email=="":
-      email=None
-  else:
-    print("your email address -----------------------> "+email)
-  if email is not None and not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
-    print(" ** Input a correct email address.")
-    while email is not None and not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
-      email=input("your email address [(skip)] --------------> ")
-      if email=="":
-        email=None
-      if email is not None and not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
+    print("your email adress ------------------------> (unspecified)")
+  if email is not None:
+    print("your email address --------------------> "+email)
+    if not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
+      print(" ** Input a correct email address.")
+    while not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
+      email=input("your email address --------------------> ")
+      if not re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$").search(email):
         print(" ** Input a correct email address.")
 
   print("\n")

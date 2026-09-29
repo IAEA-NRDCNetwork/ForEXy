@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# CODUSE Ver.2026.06.24
+# CODUSE Ver.2026.09.26
 # (Utility to analyse use of each code in Dictionary)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -730,17 +730,17 @@ def print_error(msg,line,force):
 def get_args(ver):
   parser=argparse.ArgumentParser(\
    usage="Analysis of code usage in J4 files",\
-   epilog="example: x4_coduse.py -i j4 -d dict.json -c x4_coduse.cin")
+   epilog="example: x4_coduse.py -i j4")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--dir_storage",\
    help="directory of input J4 storage")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-c", "--file_cinda",\
-   help="input JSON dictionary")
+   help="input list of codes used in CINDA (optional, default: x4_coduse.cin)", default="x4_coduse.cin")
   parser.add_argument("-l", "--file_log",\
-   help="output log file (optional)", default="x4_coduse.log")
+   help="output log file (optional, default: x4_coduse.log)", default="x4_coduse.log")
   parser.add_argument("-f", "--force",\
    help="never prompt", action="store_true")
 
@@ -772,24 +772,18 @@ def get_input(args):
       print(" ** Directory '"+dir_storage+"' does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] -----> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary -----------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON Dictionary [dict.json] -----> ")
+    file_dict=input("JSON DIctionary [dict.json] -----------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
       print(" ** File "+file_dict+" does not exist.")
 
   file_cinda=args.file_cinda
-  if file_cinda is None:
-    file_cinda=input("input CINDA code list [x4_coduse.cin] -> ")
-    if file_cinda=="":
-      file_cinda="x4_coduse.cin"
+  print("List of codes used in CINDA -----------> "+file_cinda)
   if not os.path.exists(file_cinda):
     print(" ** File "+file_cinda+" does not exist.")
   while not os.path.exists(file_cinda):

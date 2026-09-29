@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# POIPOI Ver.2026.06.24
+# POIPOI Ver.2026.09.26
 # (Utility to remove pointer from EXFOR in JSON)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -572,13 +572,13 @@ def get_args(ver):
   parser.add_argument("-i", "--file_inp",\
    help="input J4 file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-e", "--data_id",\
    help="EXFOR Dataset ID ('all' to process all datasets)")
   parser.add_argument("-o", "--file_out",\
    help="output J4 file")
   parser.add_argument("-k", "--key_keep",\
-   help="keywords to be kept (optional, 'all' to process all keywords)", default=["all"], nargs="+")
+   help="keywords to be kept (optional, default: 'all' which process all keywords)", default=["all"], nargs="+")
   parser.add_argument("-f", "--force",\
    help="never prompt", action="store_true")
   parser.add_argument("-p", "--delpoin",\
@@ -618,14 +618,11 @@ def get_input(args):
       print(" ** File "+file_inp+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] ---> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary ---------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON DIctionary [dict.json] ---> ")
+    file_dict=input("JSON DIctionary [dict.json] ---------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
@@ -674,10 +671,6 @@ def get_input(args):
       print_error(msg,"",force0)
 
   key_keep=args.key_keep
-# if key_keep is None:
-#   key_keep=input("input keywords to keep [all] --------> ")
-#   if key_keep=="":
-#     key_keep="all"
   print("input keywords to keep --------------> ", end="")
   for char in key_keep:
     print(char+" ", end="")

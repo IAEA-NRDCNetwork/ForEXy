@@ -8,10 +8,12 @@ Utility codes for the EXFOR Library
 
 ## Input files
 The following input files are available on the ForEXy zipped file on the [NRDC Software website](https://nds.iaea.org/nrdc/nrdc_sft/):
-* JSON dictionary (e.g., dict_9133.json)
-* Supplemental dictionary file for DIC227 (e.g., dict_arc_sup.227)
+* JSON dictionary (dict.json)
+* CINDA code list for CODUSE (x4_coduse.cin)
+* Supplemental dictionary file for DIC227 (dict_arc_sup.227)
+* Nubase file (e.g., nubase_4.mas20.txt)
+* Heading and quantity mapping files (dict_arc_new.324, dict_arc_new.336)
 * CSS file for J4VIEW and X4VIEW (e.g., exfor.css)
-* CINDA code list for CODUSE (e.g., x4_coduse.cin)
 * Technical term dictionary for SPELLS (e.g., x4_spells.dic)
 
 ## Installation
@@ -23,7 +25,8 @@ pip install forexy
 
 Module | Purpose
 ---    | ---
-CODDIC | Analyse use of codes in J4 library.
+C6TOCX | Convert a C6 file to a CX4 file
+CODUSE | Analyse use of codes in J4 library.
 DIC227 | Produce Archive Dictionary 227 from a NUBASE file.
 DICA2J | Convert Archive dictionaries to a JSON Dictionary.
 DICDIS | Prepare Archive and Backup dictionaries for distribution.
@@ -32,16 +35,23 @@ DICJ2T | Convert a JSON Dictionary to a Transmission dictionary.
 DIRINI | Split an EXFOR library tape into EXFOR entry files.
 DIRUPD | Update the EXFOR entry files with an EXFOR transmission tape.
 EXTMUL | Extraction of a dataset from a multiple reaction formalism subentry.
+j4TOC6 | Convert a J4 file to a C6 or C4 file
 J4TOX4 | Convert a J4 file to an EXFOR file.
 J4VIEW | Convert a J4 file to an HTML file.
+LOTRAN | Lorentz transformation for a differential cross section data point
+MAKC6L | Produce and update a C6 or C4 library
 MAKCOV | Produce a data table and covariance matrix from a J4 file.
+MAKCXL | Produce and update a CX4 library
 MAKJ4L | Produce and update J4 library.
 MAKLIB | Merge EXFOR entry files into a single library tape.
+PLOTCX | Plot CX4 file by gnuplot
 POIPOI | Remove pointers from a J4 file.
 REFBIB | Extract bibliography of reference by using DOI.
 REFDOI | Obtain DOI for articles registered in CrossRef.
 SEQADD | Add record identification to an EXFOR file.
 SPELLS | Check English spell in free text in EXFOR format.
+X4TOC6 | Convert an EXFOR file to a C6 file
+X4TOCX | Convert an EXFOR file to a CX4 file
 X4TOJ4 | Convert an EXFOR file to a J4 file.
 X4VIEW | Convert an EXFOR file to an HTML file.
 

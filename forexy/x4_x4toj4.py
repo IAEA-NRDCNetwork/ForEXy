@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# X4TOJ4 Ver.2026.06.24
+# X4TOJ4 Ver.2026.09.26
 # (Utility to convert EXFOR to JSON)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -126,13 +126,13 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Convert EXFOR to JSON",\
-   epilog="example: x4_x4toj4.py -i exfor.txt -d dict.json -o exfor.json -k all")
+   epilog="example: x4_x4toj4.py -i exfor.txt -o exfor.json -k all")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_x4",\
    help="input EXFOR file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON Dictionary")
+   help="input JSON Dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-o", "--file_j4",\
    help="output J4 file")
   parser.add_argument("-k", "--key_keep",\
@@ -181,10 +181,7 @@ def get_input(args):
       print(" ** File "+file_x4+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("JSON Dictionary [dict.json] --> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary --------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
@@ -204,10 +201,6 @@ def get_input(args):
     print_error(msg,"",force0)
 
   key_keep=args.key_keep
-# if key_keep is None:
-#   key_keep=input("input keywords to keep [all] -----> ")
-#   if key_keep=="":
-#     key_keep="all"
   print("input keywords to keep -------> ", end="")
   for char in key_keep:
     print(char+" ", end="")

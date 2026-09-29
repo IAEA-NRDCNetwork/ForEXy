@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# EXTMUL Ver.2026.06.24
+# EXTMUL Ver.2026.09.26
 # (Utility to extract a dataset from multiple reaction formalism)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -120,13 +120,13 @@ def get_args(ver):
 
   parser=argparse.ArgumentParser(\
    usage="Extract a dataset from multiple reaction formalism",\
-   epilog="example: x4_extmul.py -i exfor.txt -d dict.json -e 23756.002.3 -o exfor_out.txt")
+   epilog="example: x4_extmul.py -i exfor.txt -e 23756.002.3 -o exfor_out.txt")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_inp",\
    help="input EXFOR file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-e", "--data_id",\
    help="EXFOR dataset ID for extraction ('all' to process all datasets)")
   parser.add_argument("-o", "--file_out",\
@@ -161,14 +161,11 @@ def get_input(args):
       print(" ** File "+file_inp+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] -------------> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary -------------------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON Dictionary [dict.json] -------------> ")
+    file_dict=input("JSON DIctionary [dict.json] -------------------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):

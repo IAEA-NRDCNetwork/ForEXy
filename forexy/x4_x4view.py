@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-ver="2026.06.24"
+ver="2026.09.26"
 ############################################################
-# X4VIEW Ver.2026.06.24
+# X4VIEW Ver.2026.09.26
 # (Utility to convert EXFOR to HTML)
 #
 # Naohiko Otuka (IAEA Nuclear Data Section)
@@ -105,15 +105,15 @@ def main(file_x4,file_dict,file_css,entry,file_html,email,force0,gothi0,unfor0,l
 def get_args(ver):
   parser=argparse.ArgumentParser(\
    usage="Convert EXFOR file to HTML file",\
-   epilog="example: x4_x4view.py -i exfor.txt -d dict.json -c exfor.css -e 22742 -o exfor.html")
+   epilog="example: x4_x4view.py -i exfor.txt -e 22742 -o exfor.html")
   parser.add_argument("-v", "--version",\
    action="version", version=ver)
   parser.add_argument("-i", "--file_x4",\
    help="input EXFOR file")
   parser.add_argument("-d", "--file_dict",\
-   help="input JSON dictionary")
+   help="input JSON dictionary (optional, default: dict.json)", default="dict.json")
   parser.add_argument("-c", "--file_css",\
-   help="input CSS file")
+   help="input CSS file (optional, defailt: exfor.css)", default="exfor.css")
   parser.add_argument("-e", "--entry",\
    help="EXFOR Entry number")
   parser.add_argument("-o", "--file_html",\
@@ -168,24 +168,18 @@ def get_input(args):
       print(" ** File "+file_x4+" does not exist.")
 
   file_dict=args.file_dict
-  if file_dict is None:
-    file_dict=input("input JSON Dictionary [dict.json] -> ")
-    if file_dict=="":
-      file_dict="dict.json"
+  print("JSON Dictionary -------------------> "+file_dict)
   if not os.path.exists(file_dict):
     print(" ** File "+file_dict+" does not exist.")
   while not os.path.exists(file_dict):
-    file_dict=input("input JSON Dictionary [dict.json] -> ")
+    file_dict=input("JSON DIctionary [dict.json] -------> ")
     if file_dict=="":
       file_dict="dict.json"
     if not os.path.exists(file_dict):
       print(" ** File "+file_dict+" does not exist.")
 
   file_css=args.file_css
-  if file_css is None:
-    file_css=input("input CSS file [exfor.css] --------> ")
-    if file_css=="":
-      file_css="exfor.css"
+  print("input CSS file --------------------> "+file_css)
   if not os.path.exists(file_css):
     print(" ** File "+file_css+" does not exist.")
   while not os.path.exists(file_css):
